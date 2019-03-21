@@ -65,6 +65,7 @@ public class Game {
 		game.setSquare(3, new InstantLoseSquare(game, 3));
 		game.setSquare(5, new SkipSquare(game, 5));
 		game.setSquare(4, new SwapSquare( game, 4));
+		game.setSquare(7, new SpeedUpSquare(game, 7));
 		Die die = new Die(6);
 		game.play(die);
 	}
@@ -284,7 +285,7 @@ public class Game {
 
 		//If queue has one player, declare the player as winner
 		if (players.size() == 1) {
-			winner = players.getFirst();
+			winner = players.getLast();
 		}
 		assert invariant();
 	}

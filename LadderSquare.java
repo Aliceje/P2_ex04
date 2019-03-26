@@ -12,7 +12,7 @@ public class LadderSquare extends StandardSquare {
 	/** Length of the ladder. */
 	private int transport;
 
-	private boolean invariant() {
+	protected boolean invariant() {
 		return isValidTransport(transport);
 	}
 

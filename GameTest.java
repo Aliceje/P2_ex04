@@ -1,5 +1,6 @@
 package snakes;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -26,33 +27,33 @@ public class GameTest {
     private Die die;
     private Player john;
     private Player julia;
+    private Deque<Player> players;
 
-    /**
-     *
-     *
-     *
-     */
 
     @Before
     public void initNewGame(){
         john = new Player("John");
         julia = new Player("Julia");
-        Deque<Player> players = new LinkedList<>();
+        players = new LinkedList<>();
         players.add(john);
         players.add(julia);
         game = new Game (13, players, 6);
         die = mock(Die.class);
     }
 
-
     @Test
-    public void testPlayGameOver(){
+    public void testPlayWithMockitoDie(){
         when(die.roll()).thenReturn(3); // John: 1-4-7-10-13
         game.play(die);
         assertTrue("The game is over.", game.isOver());
         assertTrue("John wins.", john.wins());
     }
 
+    @Test
+    public void testPlayWithMockDie() {
+        MockDie mock = new MockDie(3);
+        game.play(mock);
+    }
 
     /**
      * Tests corner case when there is only one player left.
@@ -62,23 +63,9 @@ public class GameTest {
      * @throws GameNotOverException
      */
     @Test(expected=GameNotOverException.class)
-    public void winnerButGameNotOver() throws GameNotOverException {
-        game.makePlayerLose(john);
-        game.winner(); // should throw an exception
+    public void winByBeingLastOneLeft() throws GameNotOverException {
+        game.makePlayerLose(john); // takes John out of game and makes Julia the winner
+        assertEquals("Julia is assigned winner", julia, game.winner());
     }
-
-    @Test
-    public void winByBeingLastOneLeft() {
-        game.makePlayerLose(john);
-        assertEquals("Julia is current player.", julia, game.currentPlayer());
-        game.play(die);
-        assertEquals("Julia wins by default.", true, julia.wins());
-    }
-    /*
-    @Test
-    public void testPlayValidDie(){
-
-    }
-    */
 
 }

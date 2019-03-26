@@ -37,29 +37,12 @@ public class SpeedUpSquareTest {
         assertEquals("Square to land on is twice the moves away",stop, destination);
     }
 
-
-    // Version with "real" Game works as well, but depends on Game methods
-     /*
-    @Before
-    public void initGame() {
-        john = mock(Player.class);
-        jill = mock(Player.class);
-        Queue<Player> players = new LinkedList<Player>();
-        players.add(john);
-        players.add(jill);
-        game = new Game(12, players, 6);
-        testSquare = new SpeedUpSquare(game, 4);
-        game.setSquare(4, testSquare);
-    }
-    */
-    /*
     @Test
-    public void testMoveAndLand() {
-        Square stop = new StandardSquare(game, 10);
-        game.setSquare(10, stop);
-        Square destination = testSquare.moveAndLand(3);
-        assertEquals("Square to land on is twice the moves away",stop, destination);
+    public void testToString(){
+        assertEquals("Without player", "[4(SpeedUp)]", testSquare.toString());
+        when(jill.toString()).thenReturn("Jill");
+        testSquare.enter(jill);
+        assertEquals("With player", "[4(SpeedUp)<Jill>]", testSquare.toString());
     }
-    */
 
 }

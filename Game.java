@@ -28,7 +28,7 @@ public class Game {
 		return squares.size() > 3
 				&& size == squares.size()
 				&& players.size() >= 1
-				&& dieSides >= 6;
+				&& dieSides > 0;
 	}
 
 	/**

@@ -19,6 +19,7 @@ public class SnakeSquare extends LadderSquare {
 		super(transport, game, position);
 	}
 
+
 	@Override
 	protected String squareLabel() {
 		return this.destination().position() + "<-" + position;
@@ -26,10 +27,13 @@ public class SnakeSquare extends LadderSquare {
 
 	/**
 	 * Tests whether the transport is within the bounds of the game and < 0.
+	 * By having a negative transport, it is not necessary to override the destination()
+	 * method from parent LadderSquare.
 	 */
 	@Override
 	protected boolean isValidTransport(int transport) {
 		return transport < 0 &&
 				game.isValidPosition(position + transport);
 	}
+
 }

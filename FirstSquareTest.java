@@ -23,7 +23,6 @@ public class FirstSquareTest {
         firstSquare = new FirstSquare(game, 1);
         john = mock(Player.class);
         jill = mock(Player.class);
-
     }
 
     @Test
@@ -52,6 +51,11 @@ public class FirstSquareTest {
         firstSquare.enter(jill);
         firstSquare.enter(john);
         assertEquals(expectedString, firstSquare.toString());
+    }
+
+    @Test
+    public void testIsFirstSquare() {
+        assertTrue("Is the first square", firstSquare.isFirstSquare());
     }
 
 }

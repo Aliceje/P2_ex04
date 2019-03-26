@@ -18,7 +18,7 @@ public class StandardSquareTest {
 	@Before
 	public void mockGame() {
 		game = mock(Game.class);
-		when(game.isValidPosition(anyInt())).thenReturn(true);
+		when(game.isValidPosition(anyInt())).thenReturn(true); // Called in Constructor of StandardSquare
 		testSquare = new StandardSquare(game, 1);
 		jill = mock(Player.class);
 		jack = mock(Player.class);
@@ -49,10 +49,25 @@ public class StandardSquareTest {
 		testSquare.leave(jill);
 	}
 
+	@Test (expected=AssertionError.class)
+	public void testNegativePositionInput() throws AssertionError {
+		Square faultySquare = new StandardSquare(game, -1);
+	}
+
 	@Test
 	public void isNotASubSquare() {
 		assertEquals("Is not the first square", false, testSquare.isFirstSquare());
 		assertEquals("Is not the last square", false, testSquare.isLastSquare());
 	}
+
+	@Test
+	public void testIsOccupied() {
+		testSquare.enter(jack);
+		assertTrue("Square is occupied", testSquare.isOccupied());
+		testSquare.leave(jack);
+		assertTrue("Square is empty", !testSquare.isOccupied());
+	}
+
+
 
 }
